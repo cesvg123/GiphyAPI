@@ -1,10 +1,10 @@
 $(document).ready(function () {
-    var topics = [];
-
+    var topics = ["cats", "dogs", "cars", "birds"];
+    displayButtons();
     function displayGiphyShow() {
         var x = $(this).data("search");
-        console.log(x);
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+        // console.log(x);
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=Ea8ltjsv86UYOv8Lkpo81IO6zCWTc9ic&limit=10";
 
         $.ajax({
             url: queryURL,
@@ -14,30 +14,30 @@ $(document).ready(function () {
             var results = response.data;
             console.log(results);
             for (var i = 0; i < results.length; i++) {
-                var showDiv = $("<div class='col-md-4'/>");
-                //var showDiv = $("div");
-                //console.log(rating);
-                var defaultAnimatedSrc = results[i].embed_url;
+                var showDiv = $('<div class="col-md-4">');
+                var showImage = $("<img>");
                 //console.log(defaultAnimatedSrc);
-                var staticSrc = results[i].embed_url;
-                // console.log(staticSrc);
-                var showImage = $("<img/>");
+                var staticSrc = results[i].images.fixed_width_still.url;
+                var moveSrc = results[i].images.fixed_width.url;
+
                 //console.log(showImage);
-                var p = $("<p/>").append("Rating: " + results[i].rating);
+                var p = $("<p>").text("Rating: " + results[i].rating);
                 //console.log(p);
                 showImage.attr("src", staticSrc);
-                showImage.addClass("giphyPics");
+                showImage.addClass("image");
                 showImage.attr("data-state", "still");
                 showImage.attr("data-still", staticSrc);
-                showImage.attr("data-animate", defaultAnimatedSrc);
+                showImage.attr("data-animate", moveSrc);
                 showDiv.append(p);
                 showDiv.append(showImage);
-                $("#gifArea").append(showDiv);
+                $("#gifArea").prepend(showDiv);
             }
         });
     }
+
     $('#addShow').on('click', function (event) {
         event.preventDefault();
+        $('#myButtons').empty();
         var newShow = $('#giphyInput').val().trim();
         topics.push(newShow);
         $('#giphyInput').val('');
@@ -45,23 +45,22 @@ $(document).ready(function () {
     });
 
     function displayButtons() {
-        $('#myButtoms').empty();
         for (var i = 0; i < topics.length; i++) {
-            var buttom1 = $('<button class="btn btn-primary">');
-            buttom1.attr('id', 'show');
-            buttom1.attr('data-search', topics[i]);
-            buttom1.text(topics[i]);
-            $('#myButtons').append(buttom1);
+            var button1 = $('<button type="button" class="btn btn-secondary">');
+            button1.attr("id","show");
+            button1.attr('data-search', topics[i]);
+            button1.text(topics[i]);
+            $('#myButtons').append(button1);
         }
     }
 
-    displayButtons();
-    $(document).on('click', '#show', displayGiphyShow);
-    $(document).on('click', '.giphyPics', pausePlayedGifs);
+    
+    $(document).on("click", "#show", displayGiphyShow);
+    $(document).on("click", ".image", pausePlayedGifs);
 
     function pausePlayedGifs() {
         var stateGifs = $(this).attr("data-state");
-        if (state === "still") {
+        if (stateGifs === "still") {
             $(this).attr("src", $(this).attr("data-animate"));
             $(this).attr("data-state", "animate");
         } else {

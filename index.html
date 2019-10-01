@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
-    
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 
 </head>
@@ -19,40 +16,32 @@
 <body>
     <div>
         <h1> For the Giphy Lovers</h1>
-        <h2> Click the buttons below to display your Giphy of preference <br>Click on the Giphy to pause and play<br>Add
-            more buttons...</h2>
+        <h5> Click the buttons below to display your Giphy of preference <br>Click on the Giphy to pause and play</h5>
     </div>
 
     <form>
         <div class="form-group">
             <label for="giphyInput">Search for a Giphy</label>
-            <input type="text" id="giphyInput">
         </div>
-        <input id="addShow" type="submit" value="submit">
+        <div>
+            <input type="text" id="giphyInput">
+            <input id="addShow" type="submit" value="submit">
+        </div>
     </form>
 
-    <div class="row">
-        <div class="container">
-            <div class="btn-group inline pull-left">
-                <button class="btn btn-primary" id="show" data-search="cat">Cats</button>
-                <button class="btn btn-primary" id="show" data-search="dog">Dogs</button>
-                <button class="btn btn-primary" id="show" data-search="car">Cars</button>
-                <button class="btn btn-primary" id="show" data-search="bird">Bird</button>
-                <div id="myButtons"></div>
-            </div>
-        </div>
+    <div id="myButtons" class="container-fluid">
+        <!-- <div  class="btn inline pull-left">
+            </div> -->
     </div>
 
-    <div class="row">
-        <div class="container"></div>
+    <div class="container-fluid">
         <span>
-            <div id="gitArea"></div>
+            <div id="gifArea"></div>
         </span>
-
-
     </div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javascript/javascript.js"></script>
 </body>
 
 </html>
